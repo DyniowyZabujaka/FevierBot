@@ -5,6 +5,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const bot = new Discord.Client();
 
+const prefix = process.env.PREFIX
+
 client.on("ready", () => {
 // This event will run if the bot starts, and logs in, successfully.
 console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
@@ -36,21 +38,20 @@ client.on("message", async message => {
     if (message.author.bot) return;
 
     // Also good practice to ignore any message that does not start with our prefix, 
-    // which is set in the configuration file.
-    if (message.content.indexOf(">") !== 0) return;
+    if (message.content.indexOf(prefix) !== 0) return;
 
     // Here we separate our "command" name, and our "arguments" for the command. 
     // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
     // command = say
     // args = ["Is", "this", "the", "real", "life?"]
-    const args = message.content.slice(">").trim().split(/ +/g);
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
     // Let's go with a few common example commands! Feel free to delete or change those.
 
     if (command === 'fakeping') {
         if (message.author.bot) return;
-        if (message.content.indexOf(config.prefix) !== 0) return;
+        if (message.content.indexOf(prefix) !== 0) return;
         // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
         // To get the "message" itself we join the `args` back into a string with spaces: 
         const sayMessage = args.join(" ");
