@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const bot = new Discord.Client();
 
-const prefix = process.env.PREFIX
+const prefix = "!";
 
 client.on("ready", () => {
 // This event will run if the bot starts, and logs in, successfully.
